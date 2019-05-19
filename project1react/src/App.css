@@ -1,0 +1,251 @@
+/*------------User Page---------------------*/
+.userpage-container{
+  position: relative;
+  border: solid 1px black;
+  border-radius: 20px;
+  margin: 20px auto;
+  height: 700px;
+  width: 90%;
+}
+.error-container{
+  position: absolute;
+  height: 50%;
+  left: 50%;
+  top: 10px;
+  transform: translate(-50%, 0);
+  text-align: center;
+}
+.error-img{
+  height: 400px;
+  width: 700px;
+}
+.loader-container{
+  position: absolute;
+  left: 50%;
+  top: 300px;
+  transform: translate(-50%, 0);
+}
+.loading-msg{
+  font-size: 22px;
+  position: absolute;
+  left: 50%;
+  top: 400px;
+  transform: translate(-50%, 0);
+}
+.search-container{
+  position: relative;
+  width: 95%;
+  margin: 10px auto;
+}
+.search-input{
+  display: inline-block;
+  width: 50%;
+  height: 30px;
+  outline: none;
+  border: solid 1px rgb(165, 163, 163);
+  border-radius: 5px;
+}
+.search-input:focus{
+  border: solid 2px rgba(206, 32, 32, 0.276); 
+}
+.upArrow{
+  position: absolute;
+}
+.upArrow:hover{
+  color: lightcoral;
+}
+.downArrow:hover{
+  color: lightcoral;
+}
+.arrow-inuse{
+  color: rgb(11, 235, 11);
+}
+.sortable-th{
+  color: rgb(20, 159, 223);
+}
+.table-container{
+  position: relative;
+  width: 95%;
+  height: 450px;
+  margin: 10px auto;
+  overflow-y: hidden;
+}
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+table td, th{
+  position: relative;
+  text-align: left;
+  width: 16%;
+}
+tr{
+  border-top: solid 1px lightgrey;
+  height: 40px;
+}
+tbody tr:nth-child(odd) {
+  background-color: #faf6f6;
+}
+tbody tr:hover{
+  background-color: rgb(187, 220, 231);
+}
+/* tbody td:hover::after{
+  content: "";
+  position: absolute;
+  background-color: rgb(187, 220, 231);
+  left: 0;
+  top: -500px;
+  height: 1000px;
+  width: 100%;
+  z-index: -1;
+} */
+.edit-btn{
+  width: 70px;
+  height: 25px;
+  font-size: 12px;
+  padding: 2px;
+  color: rgb(58, 135, 160);
+  background-color: rgb(236, 234, 234);
+  outline: none;
+  border: none;
+  border-radius: 4px;
+}
+.edit-btn:hover{
+  background-color: rgb(98, 195, 130);
+}
+.delete-btn{
+  width: 80px;
+  height: 25px;
+  font-size:12px;
+  padding:2px;
+  color:rgb(41, 40, 40);
+  background-color: rgb(236, 234, 234);
+  outline: none;
+  border: none;
+  border-radius: 4px;
+}
+.delete-btn:hover{
+  background-color:grey;
+}
+.newbtn-container{
+  position: relative;
+  width: 95%;
+  margin: 10px auto;
+}
+.new-btn{
+  width: 150px;
+  height: 30px;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  color: white;
+  background-color: lightseagreen;
+  padding: 2px;
+}
+.new-btn:hover{
+  background-color: rgb(228, 106, 7);
+}
+.pagebar-container{
+  border-radius: 6px;
+  position: relative;
+  width: 30%;
+  height: 30px;
+  margin-top:15px;
+  margin-left:30px;
+  padding: 0;
+}
+.page-nav{
+  width: 20%;
+  display:inline-block;
+  height:100%;
+  border-radius: 6px;
+  font-size: 13px;
+  outline:none;
+}
+.cur-page{
+  border: none;
+}
+/* .pagebar-container ul > li{
+  display:inline-block;
+} */
+/*------------Create User Page--------------------------*/
+.createpage-container{
+  border: solid 1px black;
+  border-radius: 20px;
+  position: relative;
+  margin: 60px auto;
+  width: 600px;
+  height: 650px;
+}
+.create-error-container{
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  transform: translate(-50%, 0);
+  text-align:center;
+}
+.create-loader-container{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align:center;
+}
+.createpage-container .form-line{
+  margin: 20px;
+  padding: 2px;
+}
+.createpage-container label{
+  display: inline-block;
+  width: 30%;
+  text-align: right;
+  margin-right: 10px;
+}
+.createpage-container input{
+  display: inline-block;
+  width: 50%;
+  height: 25px;
+  font-size:15px;
+  outline: none;
+  border: solid 2px lightgrey;
+  border-radius: 5px;
+}
+.createpage-container input:focus{
+  border: solid 2px rgb(149, 210, 230);
+}
+.createpage-container input:hover{
+  border: solid 2px rgba(206, 32, 32, 0.276); 
+}
+.createpage-container #submitBtn{
+  width: 100px;
+  height: 30px;
+  border: solid 1px lightgrey;
+  color: white;
+  background-color: rgb(54, 138, 15);
+  font-size: 15px;
+}
+.createpage-container #submitBtn:hover{
+  border: solid 1px lightgrey;
+  background-color: rgb(193, 9, 9);
+}
+.createpage-container hr{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 10px;
+}
+.createpage-container .age-reminder{
+  position: absolute;
+  margin-top: 30px;
+  margin-left: 140px;
+  font-size: 12px;
+  color: red;
+}
+.createpage-container .password-reminder{
+  position: absolute;
+  margin-top: 30px;
+  margin-left: 140px;
+  font-size: 12px;
+  color: red;
+}
+
