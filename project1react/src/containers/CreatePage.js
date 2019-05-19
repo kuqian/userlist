@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import fatal from '../assets/fatal.png';
-//import { connect } from 'react-redux';
+import { createUser } from '../redux/actions';
+import { connect } from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 class CreatePage extends Component {
   constructor(props) {
@@ -14,9 +15,7 @@ class CreatePage extends Component {
       sex: "",
       age: "",
       password: "",
-      rPassword: "",
-      error: null,
-      isLoading: false
+      rPassword: ""
     }
   }
   handleFirstnameChange = (event) => {
@@ -40,42 +39,23 @@ class CreatePage extends Component {
   }
   handleSaveNewUser = (event) => {
     event.preventDefault();
-    this.setState({
-      isLoading: true,
-      error: null
-    })
     const { firstName, lastName, sex, age, password } = this.state;
-    setTimeout(()=>
-    axios.post("http://localhost:8080/api/users", {
+    this.props.createUser({
       firstName: firstName,
       lastName: lastName,
       sex: sex,
       age: parseInt(age),
       password: password
-    })
-      .then((response) => {
-        console.log("successfully create user:");
-        console.log(response);
-        this.setState({
-          isLoading: false,
-          error: null
-        });
-        this.props.history.push('/');
-      })
-      .catch((error) => {
-        console.log("create error");
-        console.log(error);
-        this.setState({
-          isLoading: false,
-          error: error
-        });
-      }),300);
-
+    });
   }
   render() {
-    const { firstName, lastName, sex, age, password, rPassword, error, isLoading } = this.state;
+    const { firstName, lastName, sex, age, password, rPassword } = this.state;
+    const { error, isLoading, isComplete } = this.props;
     const showAgeReminder = age !== "" && age !== "" + parseInt(age, 10);
     const showPasswordReminder = rPassword !== "" && rPassword !== password;
+    if(isComplete){
+      return <Redirect to={{pathname:'/'}}/>;
+    }
     if (error) {
       return (
         <div className="createpage-container">
@@ -149,5 +129,17 @@ class CreatePage extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.createReducer.isLoading,
+    error: state.createReducer.error,
+    isComplete: state.createReducer.isComplete
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createUser: (newUser) => dispatch(createUser(newUser))
+  }
+}
 const CreatePageWithRouter = withRouter(CreatePage);
-export default CreatePageWithRouter;
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePageWithRouter);

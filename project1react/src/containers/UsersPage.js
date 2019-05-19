@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import User from '../components/User'
 import Th from '../components/UI/Th'
 import Loader from 'react-loader-spinner';
-//import ReactPaginate from 'react-paginate';
 import Spinhead from '../assets/spinhead.gif';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -78,6 +77,13 @@ class UsersPage extends Component {
   }
   gotoCreatePage = () => {
     this.props.history.push("/create");
+  }
+  handleDeleteUser = (userID, curPageUserCnt) => {
+    console.log(userID);
+    this.props.deleteUser(userID);
+  }
+  handleEditUser = (userID) => {
+    console.log(userID);
   }
   render() {
     console.log("inside user page render function");
@@ -176,6 +182,8 @@ class UsersPage extends Component {
                       sex={ele.sex}
                       age={ele.age}
                       key={ele._id}
+                      deleteUser={()=>this.handleDeleteUser(ele._id, displayUsers.length)}
+                      editUser={()=>this.handleEditUser(ele._id)}
                     />
                   );
                 })}
@@ -205,7 +213,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUsers: () => dispatch(actions.getUsers())
+    getUsers: () => dispatch(actions.getUsers()),
+    deleteUser: (userID) => dispatch(actions.deleteUser(userID))
   }
 }
 const UsersPageWithRouter = withRouter(UsersPage);

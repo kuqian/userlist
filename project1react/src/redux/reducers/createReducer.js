@@ -10,6 +10,7 @@ const createReducer = (state = initialState, action) => {
                 ...state,
                 isLoading:false,
                 error: action.error,
+                isComplete:false
             }
         }
         case "CREATE_USER_LOADING":{
@@ -17,13 +18,15 @@ const createReducer = (state = initialState, action) => {
                 ...state,
                 isLoading:true,
                 error:null,
+                isComplete:false
             }
         }
         case "CREATE_USER_SUCCESS":{
             return{
                 ...state,
                 isLoading:false,
-                error:null
+                error:null,
+                isComplete:true
             }
         }
         default:{

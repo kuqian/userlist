@@ -33,4 +33,16 @@ router.route('/')
             res.json(users);
         });
     });
+    router.route('/:user_id')
+    .delete(function(req, res){
+        console.log("delete this user: " + req.params.user_id);
+        User.deleteOne({
+            _id:req.params.user_id
+        }, function(error, user){
+            if(error){
+                res.send(error);
+            }
+            res.json({ message: 'Successfully deleted', deletedUser: user });
+        });
+    });
 module.exports = router;

@@ -28,10 +28,21 @@ export const getUsers = () => {
             })
     }
 }
-//------------------------------------------------------------
+//--------------create user----------------------------------------------
 export const createUserLoading = () => {
     return {
         type: "CREATE_USER_LOADING"
+    }
+}
+export const createUserSuccess = () => {
+    return {
+        type: "CREATE_USER_SUCCESS"
+    }
+}
+export const createUserFail = (error) => {
+    return {
+        type: "CREATE_USER_FAIL",
+        error: error
     }
 }
 export const createUser = (newUser) => {
@@ -41,11 +52,28 @@ export const createUser = (newUser) => {
             .then((response) => {
                 console.log("successfully create user:");
                 console.log(response);
-
+                dispatch(createUserSuccess());
             })
             .catch((error) => {
                 console.log("create encounter error");
                 console.log(error);
+                dispatch(createUserFail(error));
+            });
+    }
+}
+//--------------delete user----------------------------------------------
+
+export const deleteUser = (userID) => {
+    return (dispatch) => {
+        dispatch(getUsersLoading());
+        axios.delete(`http://localhost:8080/api/users/${userID}`,{})
+            .then((response)=>{
+                console.log(response);
+                dispatch(getUsers());
+            })
+            .catch((error)=>{
+                console.log(error);
+                dispatch(getUsersFail(error));
             });
     }
 }
