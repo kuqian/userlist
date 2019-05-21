@@ -248,4 +248,83 @@ tbody tr:hover{
   font-size: 12px;
   color: red;
 }
+/*-------------------------edit user-----------------------*/
+.editpage-container{
+  border: solid 1px black;
+  border-radius: 20px;
+  position: relative;
+  margin: 60px auto;
+  width: 600px;
+  height: 650px;
+}
+.edit-error-container{
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  transform: translate(-50%, 0);
+  text-align:center;
+}
+.edit-loader-container{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align:center;
+}
+.editpage-container .form-line{
+  margin: 20px;
+  padding: 2px;
+}
+.editpage-container label{
+  display: inline-block;
+  width: 30%;
+  text-align: right;
+  margin-right: 10px;
+}
+.editpage-container input{
+  display: inline-block;
+  width: 50%;
+  height: 25px;
+  font-size:15px;
+  outline: none;
+  border: solid 2px lightgrey;
+  border-radius: 5px;
+}
+.editpage-container input:focus{
+  border: solid 2px rgb(149, 210, 230);
+}
+.editpage-container input:hover{
+  border: solid 2px rgba(206, 32, 32, 0.276); 
+}
+.editpage-container #submitBtn{
+  width: 130px;
+  height: 30px;
+  border: solid 1px lightgrey;
+  color: white;
+  background-color: rgb(54, 138, 15);
+  font-size: 15px;
+}
+.editpage-container #submitBtn:hover{
+  border: solid 1px lightgrey;
+  background-color: rgb(193, 9, 9);
+}
+.editpage-container hr{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 10px;
+}
+.editpage-container .age-reminder{
+  position: absolute;
+  margin-top: 30px;
+  margin-left: 140px;
+  font-size: 12px;
+  color: red;
+}
+.editpage-container .password-reminder{
+  position: absolute;
+  margin-top: 30px;
+  margin-left: 140px;
+  font-size: 12px;
+  color: red;
+}
 

@@ -1,7 +1,6 @@
 const initialState = {
     isLoading: false,
-    error:null,
-    isComplete:false
+    error:null
 }
 const createReducer = (state = initialState, action) => {
     switch(action.type){
@@ -9,24 +8,21 @@ const createReducer = (state = initialState, action) => {
             return{
                 ...state,
                 isLoading:false,
-                error: action.error,
-                isComplete:false
+                error: action.error
             }
         }
         case "CREATE_USER_LOADING":{
             return{
                 ...state,
                 isLoading:true,
-                error:null,
-                isComplete:false
+                error:null
             }
         }
         case "CREATE_USER_SUCCESS":{
             return{
                 ...state,
                 isLoading:false,
-                error:null,
-                isComplete:true
+                error:null
             }
         }
         default:{

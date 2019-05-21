@@ -78,12 +78,14 @@ class UsersPage extends Component {
   gotoCreatePage = () => {
     this.props.history.push("/create");
   }
-  handleDeleteUser = (userID, curPageUserCnt) => {
+  handleDeleteUser = (userID, curPageUserCount) => {
     console.log(userID);
     this.props.deleteUser(userID);
   }
   handleEditUser = (userID) => {
+    console.log("inside handleEdit User");
     console.log(userID);
+    this.props.history.push(`/edit/${userID}`);
   }
   render() {
     console.log("inside user page render function");

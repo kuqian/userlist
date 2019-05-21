@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import UsersPage from './containers/UsersPage';
 import CreatePage from './containers/CreatePage';
+import EditPage from './containers/EditPage';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 
@@ -22,6 +23,11 @@ class App extends Component {
             path='/create'
             exact={true}
             component={CreatePage}
+          />
+          <Route
+            path="/edit/:user_id"
+            exact={true}
+            component={EditPage}
           />
         </Switch>
       </BrowserRouter>

@@ -28,6 +28,20 @@ export const getUsers = () => {
             })
     }
 }
+export const deleteUser = (userID) => {
+    return (dispatch) => {
+        dispatch(getUsersLoading());
+        axios.delete(`http://localhost:8080/api/users/${userID}`, {})
+            .then((response) => {
+                console.log(response);
+                dispatch(getUsers());
+            })
+            .catch((error) => {
+                console.log(error);
+                dispatch(getUsersFail(error));
+            });
+    }
+}
 //--------------create user----------------------------------------------
 export const createUserLoading = () => {
     return {
@@ -45,7 +59,7 @@ export const createUserFail = (error) => {
         error: error
     }
 }
-export const createUser = (newUser) => {
+export const createUser = (newUser, history) => {
     return (dispatch) => {
         dispatch(createUserLoading());
         axios.post("http://localhost:8080/api/users", newUser)
@@ -53,6 +67,7 @@ export const createUser = (newUser) => {
                 console.log("successfully create user:");
                 console.log(response);
                 dispatch(createUserSuccess());
+                history.push('/');
             })
             .catch((error) => {
                 console.log("create encounter error");
@@ -61,19 +76,68 @@ export const createUser = (newUser) => {
             });
     }
 }
-//--------------delete user----------------------------------------------
-
-export const deleteUser = (userID) => {
+//--------------------Edit User------------------------------
+export const getUserLoading = () => {
+    return {
+        type: "GET_USER_LOADING"
+    }
+}
+export const getUserSuccess = (user) => {
+    return {
+        type: "GET_USER_SUCCESS",
+        data: user
+    }
+}
+export const getUserFail = (error) => {
+    return {
+        type: "GET_USER_FAIL",
+        error: error
+    }
+}
+export const getUser = (user_id) => {
     return (dispatch) => {
-        dispatch(getUsersLoading());
-        axios.delete(`http://localhost:8080/api/users/${userID}`,{})
-            .then((response)=>{
-                console.log(response);
-                dispatch(getUsers());
+        dispatch(getUserLoading());
+        axios.get(`http://localhost:8080/api/users/${user_id}`)
+            .then((response) => {
+                console.log(response.data);
+                setTimeout(()=>dispatch(getUserSuccess(response.data)), 1000);
             })
-            .catch((error)=>{
+            .catch((error) => {
                 console.log(error);
-                dispatch(getUsersFail(error));
+                dispatch(getUserFail());
+            });
+    }
+}
+
+export const editUserLoading = () => {
+    return {
+        type: "EDIT_USER_LOADING"
+    }
+}
+export const editUserSuccess = () => {
+    return {
+        type: "EDIT_USER_SUCCESS"
+    }
+}
+export const editUserFail = (error) => {
+    return {
+        type: "EDIT_USER_FAIL",
+        error: error
+    }
+}
+export const editUser = (editedUser, history) => {
+    console.log(editedUser);
+    return (dispatch) => {
+        dispatch(editUserLoading());
+        axios.put(`http://localhost:8080/api/users/${editedUser._id}`, editedUser)
+            .then((response) => {
+                console.log(response);
+                dispatch(editUserSuccess());
+                history.push("/");
+            })
+            .catch((error) => {
+                console.log(error);
+                dispatch(editUserFail());
             });
     }
 }

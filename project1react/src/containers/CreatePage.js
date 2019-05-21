@@ -46,16 +46,13 @@ class CreatePage extends Component {
       sex: sex,
       age: parseInt(age),
       password: password
-    });
+    }, this.props.history);
   }
   render() {
     const { firstName, lastName, sex, age, password, rPassword } = this.state;
-    const { error, isLoading, isComplete } = this.props;
+    const { error, isLoading } = this.props;
     const showAgeReminder = age !== "" && age !== "" + parseInt(age, 10);
     const showPasswordReminder = rPassword !== "" && rPassword !== password;
-    if(isComplete){
-      return <Redirect to={{pathname:'/'}}/>;
-    }
     if (error) {
       return (
         <div className="createpage-container">
@@ -132,13 +129,12 @@ class CreatePage extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoading: state.createReducer.isLoading,
-    error: state.createReducer.error,
-    isComplete: state.createReducer.isComplete
+    error: state.createReducer.error
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    createUser: (newUser) => dispatch(createUser(newUser))
+    createUser: (newUser, history) => dispatch(createUser(newUser, history))
   }
 }
 const CreatePageWithRouter = withRouter(CreatePage);
