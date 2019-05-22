@@ -1,7 +1,8 @@
 const initialState = {
     isLoading:false,
     error: null,
-    user:{}
+    user:{},
+    passwordWrong: false
 }
 const editReducer = (state = initialState, action) => {
     switch(action.type){
@@ -10,7 +11,8 @@ const editReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: null,
-                isLoading:true
+                isLoading:true,
+                passwordWrong:false
             }
         }
         case "GET_USER_SUCCESS":{
@@ -18,7 +20,8 @@ const editReducer = (state = initialState, action) => {
                 ...state,
                 isLoading:false,
                 error: null,
-                user: action.data
+                user: action.data,
+                passwordWrong:false
             }
         }
         case "GET_USER_FAIL":{
@@ -26,6 +29,7 @@ const editReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 error: action.error,
+                passwordWrong:false
             }
         }
         //----------EDIT----------------
@@ -33,21 +37,41 @@ const editReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: true,
-                error: null
+                error: null,
+                passwordWrong:false
             }
         }
         case "EDIT_USER_SUCCESS":{
             return {
                 ...state,
                 isLoading:false,
-                error: null
+                error: null,
+                passwordWrong:false
             }
         }
         case "EDIT_USER_FAIL":{
             return {
                 ...state,
                 isLoading:false,
-                error:action.error
+                error:action.error,
+                passwordWrong:false
+            }
+        }
+        case "SET_PASSWORD_WRONG":{
+            return {
+                ...state,
+                isLoading:false,
+                error: null,
+                passwordWrong:true
+            }
+        }
+        case "CLEAR_PASSWORD_WRONG":{
+            console.log("weird");
+            return {
+                ...state,
+                isLoading:false,
+                error:null,
+                passwordWrong:false
             }
         }
         default:{

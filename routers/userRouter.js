@@ -34,33 +34,37 @@ router.route('/')
         });
     });
 router.route('/:user_id')
-    .get(function(req, res){
+    .get(function (req, res) {
         console.log(`get this user: ${req.params.user_id}`);
-        User.findById(req.params.user_id, function(error, user){
-            if(error){
+        User.findById(req.params.user_id, function (error, user) {
+            if (error) {
                 res.send(error);
             }
             res.json(user);
         })
     })
-    .put(function(req, res){
+    .put(function (req, res) {
         console.log("modify this user: " + req.params.user_id);
-        User.findById(req.params.user_id, function(error, user){
-            if(error){
+        User.findById(req.params.user_id, function (error, user) {
+            if (error) {
                 res.send(error);
             }
-            ["firstName", "lastName", "sex", "age"].forEach((key)=>{
-                if(req.body[key]){
-                    user[key] = req.body[key];
-                    console.log(`update ${key} value of user`);
-                }
-            });
-            user.save(function(error){
-                if(error){
-                    res.send(error);
-                }
-                res.json({message: `user ${req.params.user_id} has been updated!`});
-            });
+            if (req.body.password !== user.password) {
+                res.status(206).send({ status: 206, message: 'password incorrect', type: 'client error' });
+            } else {
+                ["firstName", "lastName", "sex", "age"].forEach((key) => {
+                    if (req.body[key]) {
+                        user[key] = req.body[key];
+                        console.log(`update ${key} value of user`);
+                    }
+                });
+                user.save(function (error) {
+                    if (error) {
+                        res.send(error);
+                    }
+                    res.json({ message: `user ${req.params.user_id} has been updated!` });
+                });
+            }
         });
     })
     .delete(function (req, res) {

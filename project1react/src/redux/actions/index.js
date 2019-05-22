@@ -21,7 +21,7 @@ export const getUsers = () => {
         dispatch(getUsersLoading());
         axios.get("http://localhost:8080/api/users")
             .then((res) => {
-                setTimeout(() => { dispatch(getUsersSuccess(res.data)); }, 300);
+                dispatch(getUsersSuccess(res.data));
             })
             .catch((error) => {
                 dispatch(getUsersFail(error));
@@ -100,11 +100,12 @@ export const getUser = (user_id) => {
         axios.get(`http://localhost:8080/api/users/${user_id}`)
             .then((response) => {
                 console.log(response.data);
-                setTimeout(()=>dispatch(getUserSuccess(response.data)), 1000);
+                setTimeout(() => dispatch(getUserSuccess(response.data)), 100);
+                console.log(response.status);
             })
             .catch((error) => {
                 console.log(error);
-                dispatch(getUserFail());
+                dispatch(getUserFail(error));
             });
     }
 }
@@ -132,12 +133,36 @@ export const editUser = (editedUser, history) => {
         axios.put(`http://localhost:8080/api/users/${editedUser._id}`, editedUser)
             .then((response) => {
                 console.log(response);
-                dispatch(editUserSuccess());
-                history.push("/");
+                console.log(response.status);
+                if (response.status === 206) {
+                    const newError = new Error("password wrong");
+                    newError.status = 206;
+                    throw newError;
+                } else {
+                    dispatch(editUserSuccess());
+                    history.push("/");
+                }
+
             })
             .catch((error) => {
-                console.log(error);
-                dispatch(editUserFail());
+                console.log("Error: test");
+                console.log(typeof (error));
+                console.log((Object.keys(error)));
+                if (error.status) {
+                    dispatch(setPasswordWrong());
+                } else {
+                    dispatch(editUserFail(error));
+                }
             });
+    }
+}
+export const setPasswordWrong = () => {
+    return {
+        type: "SET_PASSWORD_WRONG"
+    }
+}
+export const clearPasswordWrong = () => {
+    return {
+        type: "CLEAR_PASSWORD_WRONG"
     }
 }
